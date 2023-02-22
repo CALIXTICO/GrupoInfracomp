@@ -11,11 +11,11 @@ public class Identificador {
 		this.idMaximo = idMaximo;
 	}
 
-	public int getIdActual() {
+	public synchronized int getIdActual() {
 		return idActual;
 	}
 
-	public void sumIdActual() {
+	public synchronized void sumIdActual() {
 		this.idActual+= 1;
 	}
 
