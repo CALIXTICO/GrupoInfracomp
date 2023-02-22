@@ -21,8 +21,9 @@ public class Azul extends Thread {
 	}
 	
 
-	public void run () {
-		
+	public void run () 
+	{
+		System.out.println(etapa);		
 	}
 
 }
