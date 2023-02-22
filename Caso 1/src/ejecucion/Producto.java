@@ -17,4 +17,14 @@ public class Producto {
     public int getThread(){
         return this.colorReceptor;
     }
+    public int getIdentificador(){
+        return this.identificador;
+    }
+    public String getMensaje(){
+        return this.mensaje;
+    }
+    public void setMensaje(String mensaje){
+        this.mensaje = mensaje;
+    }
+
 }
