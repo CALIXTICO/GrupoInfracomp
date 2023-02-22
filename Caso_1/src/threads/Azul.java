@@ -26,15 +26,16 @@ public class Azul extends Thread {
 
 	public void run () 
 	{
+		//Comportamiento de Procesos de Etapa 1
 		if (etapa == 1)
 		{
 			while (cantidadProductosProcesar > 0)
 			{
+				//Creación de un producto
 				crearProducto();
 				System.out.println(productoEnProceso.getIdentificador());
 				cantidadProductosProcesar--;
-			}
-			
+			}			
 		}
 	}
 	

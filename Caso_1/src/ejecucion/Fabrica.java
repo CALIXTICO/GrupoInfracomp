@@ -3,6 +3,7 @@ package ejecucion;
 import java.util.Scanner;
 
 import threads.Azul;
+import threads.Rojo;
 
 public class Fabrica {
 	
@@ -12,7 +13,7 @@ public class Fabrica {
 	//Buzones de cada etapa
 	static Buzon buzon1;
 	static Buzon buzon2;
-	static Buzon buzonFinal;
+	static BuzonFinal buzonFinal;
 	
 
 	public static void main(String[] args) 
@@ -36,9 +37,10 @@ public class Fabrica {
 		identificador = new Identificador((numProductosPorProceso * numProcesosPorEtapa)  - 1);
 		
 				
-		//Creacion de buzones 1 y 2
+		//Creacion de buzones
 		buzon1 = new Buzon(capacidadBuzones);
 		buzon2 = new Buzon(capacidadBuzones);
+		buzonFinal = new BuzonFinal(-1);
 		
 		//Creacion de Procesos
 		
@@ -46,7 +48,13 @@ public class Fabrica {
 		creacionProcesosAzules(numProcesosPorEtapa, numProductosPorProceso );
 		
 		//Naranjas
-			
+		
+		
+		//Rojo
+		Rojo procesoRojo = new Rojo(buzonFinal, numProcesosPorEtapa*numProductosPorProceso);
+		procesoRojo.start();
+		
+		
 
 	}
 	
