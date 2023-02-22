@@ -36,6 +36,7 @@ public class Buzon {
         return productoAzul.size() + productoNaranja.size();
     }
     
+    //Metodo llamado por procesos para saber si el buzón está o no lleno
     public synchronized boolean estaLleno()
     {
         return (capacidadLimite == capacidadActual());

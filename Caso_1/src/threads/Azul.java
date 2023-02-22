@@ -23,7 +23,6 @@ public class Azul extends Thread {
 		this.identificador = identificador;
 	}
 	
-
 	public void run () 
 	{
 		//Comportamiento de Procesos de Etapa 1
@@ -33,8 +32,11 @@ public class Azul extends Thread {
 			{
 				//Creación de un producto
 				crearProducto();
-				System.out.println(productoEnProceso.getIdentificador());
 				cantidadProductosProcesar--;
+				
+				//Entrega del producto al buzón
+				entregarProducto();
+				
 			}			
 		}
 	}
@@ -47,6 +49,32 @@ public class Azul extends Thread {
 			identificador.sumIdActual();
 		}
 	}
+	
+	public void entregarProducto()
+	{
+		synchronized(buzonSalida)
+		{
+			try
+			{
+				boolean entregoProducto = false;
+				while (!entregoProducto)
+				{
+					if (buzonSalida.estaLleno())
+					{
+						buzonSalida.wait();
+					}
+					else
+					{
+						System.out.println(productoEnProceso.getIdentificador());
+						buzonSalida.almacenarAzul(productoEnProceso);
+						entregoProducto = true;
+					}
+				}
+			}
+			catch(InterruptedException e) {}
+		}
+	}
+	
 	
 
 }

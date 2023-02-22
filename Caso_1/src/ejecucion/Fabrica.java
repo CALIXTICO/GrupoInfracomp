@@ -51,8 +51,8 @@ public class Fabrica {
 		
 		
 		//Rojo
-		Rojo procesoRojo = new Rojo(buzonFinal, numProcesosPorEtapa*numProductosPorProceso);
-		procesoRojo.start();
+		/*Rojo procesoRojo = new Rojo(buzonFinal, numProcesosPorEtapa*numProductosPorProceso);
+		procesoRojo.start();*/
 		
 		
 
