@@ -29,19 +29,29 @@ public class Naranja extends Thread{
 		boolean termino = false;
 		while(!termino)
 		{
-			if(etapa == 1)
+			while(productos > 0)
 			{
-				while(productos > 0)
+				Naranja.yield();
+				if(etapa == 1)
 				{
-					Naranja.yield();
+					crearProducto();
+					System.out.println(productoEnProceso.getIdentificador());
+					productos--;
+					if(productos == 0)
+						termino = true;
 				}
-				Producto prodE = buzonEntrada.retirarNarnja();
-				System.out.println("El proceso recibió el producto: " + prodE);
-				crearProducto();
-				System.out.println(productoEnProceso.getIdentificador());
-				productos--;
-				if(productos == 0)
-					termino = true;
+				if(etapa > 1)
+				{
+					Producto prodE = buzonEntrada.retirarNarnja();
+					System.out.println("El proceso recibió el producto: " + prodE);
+					crearProducto();
+					System.out.println(productoEnProceso.getIdentificador());
+					productos--;
+					if(productos == 0)
+						termino = true;
+				}
+				
+				
 			}
 		}
 		
