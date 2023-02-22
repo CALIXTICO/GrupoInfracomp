@@ -32,11 +32,13 @@ public class Buzon {
 
     // Para que la capacidad del buzón no se duplique al tener dos arrays el límite del buzón es por ende la suma de los tamaños del array, la suma de estos
     // debe ser inferior a la capacidad dada por parametro.
-    public int capacidadActual(){
+    public synchronized int capacidadActual(){
         return productoAzul.size() + productoNaranja.size();
     }
-    public int getCapacidadLimite(){
-        return capacidadLimite;
+    
+    public synchronized boolean estaLleno()
+    {
+        return (capacidadLimite == capacidadActual());
         
     }
     
