@@ -99,12 +99,9 @@ public class Fabrica {
 		Naranja proceso2 = new Naranja(buzon1, buzon2, productosXProceso, 2, identificador);
 		Naranja proceso3 = new Naranja(buzon2, buzonFinal, productosXProceso, 3, identificador);
 		
-		for(int i = 0; i < 3; i++)
-		{
-			proceso1.start();
-			proceso2.start();
-			proceso3.start();
-		}
+		proceso1.start();
+		proceso2.start();
+		proceso3.start();
 	}
 
 }

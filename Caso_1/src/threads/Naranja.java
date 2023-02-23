@@ -94,15 +94,10 @@ public class Naranja extends Thread{
 	{
 		synchronized(buzonSalida)
 		{
-			try 
-			{
-				sleep((long) (Math.random()*450));	
 				
-				productoEnProceso = new Producto(identificador.getIdActual(), "Creacion de Producto Naranja en Etapa 1", 0);
-				System.out.println("Se creo producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
-				identificador.sumIdActual();
-			} 
-			catch (InterruptedException e) {}
+			productoEnProceso = new Producto(identificador.getIdActual(), "Creacion de Producto Naranja en Etapa 1", 0);
+			System.out.println("Se creo producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
+			identificador.sumIdActual();
 		}
 	}
 }
