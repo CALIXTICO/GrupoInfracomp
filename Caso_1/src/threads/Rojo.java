@@ -20,9 +20,9 @@ public class Rojo extends Thread{
 			Integer identificador = productoRetirado.getIdentificador();
 			String resultado = productoRetirado.getMensaje();
 			System.out.println("El producto con identificador " + identificador + "con el mensaje " + resultado + " ha sido generado");
-			int numero = (int)(Math.random()*6);
+			long numero = ((long) (50 + Math.random()*450));
 			try {
-				sleep(5000* numero);
+				sleep(numero);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -34,11 +34,10 @@ public class Rojo extends Thread{
 	{
 		// En este While se revisa si el buzón final ya cuenta con todos los elementos necesarios para empezar a retirar
 		// Acá se simula la espera activa de manera que hasta que no se cumpla la condición anunciará que aún no es posible realizar le ejecución
-		while(this.buzon.capacidadActual() < cantTotal){
-			int numero = (int)(Math.random()*6);
-			System.out.println("Aún no es posible retirar todos los elementos");
+		while(this.buzon.numProductos() < cantTotal){
+			long numero = ((long) (50 + Math.random()*450));
 			try {
-				sleep(5000 * numero);
+				sleep(numero);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

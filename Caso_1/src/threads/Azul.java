@@ -90,7 +90,7 @@ public class Azul extends Thread {
 					{
 						System.out.println("Se entrego producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
 						buzonSalida.almacenarAzul(productoEnProceso);
-						buzonSalida.notify();
+						buzonSalida.notifyAll();
 						entregoProducto = true;
 						productoEnProceso = null;
 					}
@@ -117,7 +117,7 @@ public class Azul extends Thread {
 					{
 						productoEnProceso = buzonEntrada.retirarAzul();
 						System.out.println("Se extrajo producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
-						buzonEntrada.notify();
+						buzonEntrada.notifyAll();
 						extrajoProducto = true;
 					}
 				}
@@ -130,9 +130,9 @@ public class Azul extends Thread {
 	{
 		try 
 		{
-			sleep((long) (Math.random()*450));		
+			sleep((long) (50 + Math.random()*450));		
 			
-			productoEnProceso.setMensaje(productoEnProceso.getMensaje() + "modificado en proceso azul de la etapa " + etapa);
+			productoEnProceso.setMensaje(productoEnProceso.getMensaje() + "Modificado en proceso azul de la etapa " + etapa + ". ");
 		} 
 		catch (InterruptedException e) {}
 	}

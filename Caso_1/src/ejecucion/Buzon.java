@@ -19,7 +19,7 @@ public class Buzon {
         productoAzul.add(i);
     }
      // Retira productos de tipo naranja del array de productos naranjas
-    public synchronized Producto retirarNarnja (){
+    public synchronized Producto retirarNaranja (){
         Producto producto = productoNaranja.remove(0);
         return producto;
         

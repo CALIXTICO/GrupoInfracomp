@@ -25,67 +25,34 @@ public class Naranja extends Thread{
 	
 	public void run()
 	{
-		boolean termino = false;
-		while(!termino)
+		//Comportamiento de Procesos de Etapa 1
+		if (etapa == 1)
 		{
-			if(etapa == 1)
+			while (productos > 0)
 			{
-				while(productos > 0)
-				{
-					crearProducto();
-					productos--;
-					
-					if(buzonSalida.estaLleno())
-					{
-						Naranja.yield();
-					}
-					else
-					{
-						System.out.println("Se entregÃ³ producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
-						buzonSalida.almacenarNaranja(productoEnProceso);
-						productoEnProceso = null;
-					}
-				}
-			}
-			else
-			{
-				while(productos > 0)
-				{
-					if (!buzonEntrada.hayProductosNaranjas())
-					{
-						Naranja.yield();
-					}
-					else
-					{
-						productoEnProceso = buzonEntrada.retirarNarnja();
-						System.out.println("Se extrajo producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
-					}
-					
-				}
-				
-				try 
-				{
-					sleep((long) (Math.random()*450));		
-					
-					productoEnProceso.setMensaje(productoEnProceso.getMensaje() + "modificado en proceso naranja de la etapa " + etapa);
-				} 
-				catch (InterruptedException e) {
-					
-				}
-				
+				//Creación de un producto
+				crearProducto();
 				productos--;
 				
-				if (buzonSalida.estaLleno())
-				{
-					Naranja.yield();
-				}
-				else
-				{
-					System.out.println("Se entrego producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
-					buzonSalida.almacenarNaranja(productoEnProceso);
-					productoEnProceso = null;
-				}
-
+				//Entrega del producto al buzón de salida
+				entregarProducto();
+				
+			}			
+		}
+		
+		else
+		{
+			while (productos > 0)
+			{
+				//Extracción del producto del buzon de entrada
+				extraerProducto();
+				
+				//Procesamiento del producto
+				procesarProducto();
+				productos--;
+				
+				//Entrega del producto al buzón de salida
+				entregarProducto();
 			}
 		}
 	}
@@ -99,5 +66,69 @@ public class Naranja extends Thread{
 			System.out.println("Se creo producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
 			identificador.sumIdActual();
 		}
+	}
+	
+	public void entregarProducto()
+	{
+		synchronized(buzonSalida)
+		{
+			try
+			{
+				boolean entregoProducto = false;
+				while (!entregoProducto)
+				{
+					if (buzonSalida.estaLleno())
+					{
+						buzonSalida.wait();
+					}
+					else
+					{
+						System.out.println("Se entrego producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
+						buzonSalida.almacenarNaranja(productoEnProceso);
+						buzonSalida.notifyAll();
+						entregoProducto = true;
+						productoEnProceso = null;
+					}
+				}
+			}
+			catch(InterruptedException e) {}
+		}
+	}
+	
+	public void extraerProducto()
+	{
+		synchronized(buzonEntrada)
+		{
+			try
+			{
+				boolean extrajoProducto = false;
+				while (!extrajoProducto)
+				{
+					if (!buzonEntrada.hayProductosNaranjas())
+					{
+						buzonEntrada.wait();
+					}
+					else
+					{
+						productoEnProceso = buzonEntrada.retirarNaranja();
+						System.out.println("Se extrajo producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
+						buzonEntrada.notifyAll();
+						extrajoProducto = true;
+					}
+				}
+			}
+			catch(InterruptedException e) {}
+		}
+	}
+	
+	public void procesarProducto()
+	{
+		try 
+		{
+			sleep((long) (50 + Math.random()*450));		
+			
+			productoEnProceso.setMensaje(productoEnProceso.getMensaje() + "Modificado en proceso naranja de la etapa " + etapa + ". ");
+		} 
+		catch (InterruptedException e) {}
 	}
 }
