@@ -48,6 +48,7 @@ public class Azul extends Thread {
 				extraerProducto();
 				
 				//Procesamiento del producto
+				procesarProducto();
 				cantidadProductosProcesar--;
 				
 				//Entrega del producto al buzón de salida
@@ -60,9 +61,15 @@ public class Azul extends Thread {
 	{
 		synchronized(buzonSalida)
 		{
-			productoEnProceso = new Producto(identificador.getIdActual(), "Creación de Producto Azul en Etapa 1", 0);
-			System.out.println("Se creó producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
-			identificador.sumIdActual();
+			try 
+			{
+				sleep((long) (Math.random()*450));	
+				
+				productoEnProceso = new Producto(identificador.getIdActual(), "Creación de Producto Azul en Etapa 1", 0);
+				System.out.println("Se creó producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
+				identificador.sumIdActual();
+			} 
+			catch (InterruptedException e) {}
 		}
 	}
 	
@@ -117,6 +124,17 @@ public class Azul extends Thread {
 			}
 			catch(InterruptedException e) {}
 		}
+	}
+	
+	public void procesarProducto()
+	{
+		try 
+		{
+			sleep((long) (Math.random()*450));		
+			
+			productoEnProceso.setMensaje(productoEnProceso.getMensaje() + "modificado en proceso azul de la etapa " + etapa);
+		} 
+		catch (InterruptedException e) {}
 	}
 	
 
