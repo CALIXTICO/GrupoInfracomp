@@ -26,6 +26,13 @@ public class BuzonFinal extends Buzon{
         map.put(identificador, product);
 
     }
+    
+    @Override
+    public synchronized boolean estaLleno()
+    {
+        return (true);
+        
+    }
 
     
 }

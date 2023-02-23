@@ -20,13 +20,13 @@ public class Buzon {
     }
      // Retira productos de tipo naranja del array de productos naranjas
     public synchronized Producto retirarNarnja (){
-        Producto producto = productoNaranja.get(productoNaranja.size());
+        Producto producto = productoNaranja.remove(0);
         return producto;
         
     }
      // Retira productos de tipo azules del array de productos azules
     public synchronized Producto retirarAzul (){
-        Producto producto = productoAzul.get(productoAzul.size());
+        Producto producto = productoAzul.remove(0);
         return producto;
     }
 
@@ -42,5 +42,18 @@ public class Buzon {
         return (capacidadLimite == capacidadActual());
         
     }
+    
+    //Metodo que llaman los procesos azules para saber si pueden extraer productos del buzon
+    public synchronized boolean hayProductosAzules()
+    {
+    	return (productoAzul.size()>0);
+    }
+    
+  //Metodo que llaman los procesos naranjas para saber si pueden extraer productos del buzon
+    public synchronized boolean hayProductosNaranjas()
+    {
+    	return (productoNaranja.size()>0);
+    }
+    
     
 }
