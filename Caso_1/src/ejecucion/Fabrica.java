@@ -3,6 +3,7 @@ package ejecucion;
 import java.util.Scanner;
 
 import threads.Azul;
+import threads.Naranja;
 import threads.Rojo;
 
 public class Fabrica {
@@ -23,17 +24,17 @@ public class Fabrica {
 		
 		//Solicitudes de datos al usuario
 		
-		System.out.println("Por favor ingrese la capacidad máxima de los buzones 1 y 2:");
+		System.out.println("Por favor ingrese la capacidad mï¿½xima de los buzones 1 y 2:");
 		int capacidadBuzones = in.nextInt();
 		
-		System.out.println("Por favor ingrese el número de procesos que habrá por etapa:");
+		System.out.println("Por favor ingrese el nï¿½mero de procesos que habrï¿½ por etapa:");
 		int numProcesosPorEtapa = in.nextInt();
 		
-		System.out.println("Por favor ingrese el número de productos que creará cada proceso en la etapa 1:");
+		System.out.println("Por favor ingrese el nï¿½mero de productos que crearï¿½ cada proceso en la etapa 1:");
 		int numProductosPorProceso = in.nextInt();
 		
 		
-		//Creación del identificador
+		//Creaciï¿½n del identificador
 		identificador = new Identificador((numProductosPorProceso * numProcesosPorEtapa)  - 1);
 		
 				
@@ -48,7 +49,7 @@ public class Fabrica {
 		creacionProcesosAzules(numProcesosPorEtapa, numProductosPorProceso );
 		
 		//Naranjas
-		
+		creacionProcesosNaranjas(numProductosPorProceso);
 		
 		//Rojo
 		Rojo procesoRojo = new Rojo(buzonFinal, numProcesosPorEtapa*numProductosPorProceso);
@@ -64,19 +65,19 @@ public class Fabrica {
 		
 		Azul [] procesosAzules = new Azul[numProcesosAzules];
 		
-		//Creación Etapa 1
+		//Creaciï¿½n Etapa 1
 		for (int i = 0; i < numProcesosPorEtapa-1; i++)
 		{
 			procesosAzules[i] = new Azul(1, numProductosPorProceso, null, buzon1, identificador);
 		}
 		
-		//Creación Etapa 2
+		//Creaciï¿½n Etapa 2
 		for (int i = numProcesosPorEtapa-1; i < (numProcesosPorEtapa-1)*2; i++)
 		{
 			procesosAzules[i] = new Azul(2, numProductosPorProceso, buzon1, buzon2, identificador);
 		}
 		
-		//Creación Etapa 3
+		//Creaciï¿½n Etapa 3
 		for (int i = (numProcesosPorEtapa-1)*2; i < (numProcesosPorEtapa-1)*3; i++)
 		{
 			procesosAzules[i] = new Azul(3, numProductosPorProceso, buzon2, buzonFinal, identificador);
@@ -90,6 +91,20 @@ public class Fabrica {
 		
 		
 		
+	}
+	
+	public static void creacionProcesosNaranjas(int productosXProceso)
+	{
+		Naranja proceso1 = new Naranja(null, buzon1, productosXProceso, 1, identificador);
+		Naranja proceso2 = new Naranja(buzon1, buzon2, productosXProceso, 2, identificador);
+		Naranja proceso3 = new Naranja(buzon2, buzonFinal, productosXProceso, 3, identificador);
+		
+		for(int i = 0; i < 3; i++)
+		{
+			proceso1.start();
+			proceso2.start();
+			proceso3.start();
+		}
 	}
 
 }
