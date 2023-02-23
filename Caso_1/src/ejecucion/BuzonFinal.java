@@ -30,7 +30,7 @@ public class BuzonFinal extends Buzon{
     @Override
     public synchronized boolean estaLleno()
     {
-        return (true);
+        return (false);
         
     }
 

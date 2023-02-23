@@ -34,10 +34,25 @@ public class Azul extends Thread {
 				crearProducto();
 				cantidadProductosProcesar--;
 				
-				//Entrega del producto al buzón
+				//Entrega del producto al buzón de salida
 				entregarProducto();
 				
 			}			
+		}
+		
+		else
+		{
+			while (cantidadProductosProcesar > 0)
+			{
+				//Extracción del producto del buzon de entrada
+				extraerProducto();
+				
+				//Procesamiento del producto
+				cantidadProductosProcesar--;
+				
+				//Entrega del producto al buzón de salida
+				entregarProducto();
+			}
 		}
 	}
 	
@@ -46,6 +61,7 @@ public class Azul extends Thread {
 		synchronized(buzonSalida)
 		{
 			productoEnProceso = new Producto(identificador.getIdActual(), "Creación de Producto Azul en Etapa 1", 0);
+			System.out.println("Se creó producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
 			identificador.sumIdActual();
 		}
 	}
@@ -65,9 +81,11 @@ public class Azul extends Thread {
 					}
 					else
 					{
-						System.out.println(productoEnProceso.getIdentificador());
+						System.out.println("Se entrego producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
 						buzonSalida.almacenarAzul(productoEnProceso);
+						buzonSalida.notify();
 						entregoProducto = true;
+						productoEnProceso = null;
 					}
 				}
 			}
@@ -75,6 +93,31 @@ public class Azul extends Thread {
 		}
 	}
 	
+	public void extraerProducto()
+	{
+		synchronized(buzonEntrada)
+		{
+			try
+			{
+				boolean extrajoProducto = false;
+				while (!extrajoProducto)
+				{
+					if (!buzonEntrada.hayProductosAzules())
+					{
+						buzonEntrada.wait();
+					}
+					else
+					{
+						productoEnProceso = buzonEntrada.retirarAzul();
+						System.out.println("Se extrajo producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
+						buzonEntrada.notify();
+						extrajoProducto = true;
+					}
+				}
+			}
+			catch(InterruptedException e) {}
+		}
+	}
 	
 
 }
