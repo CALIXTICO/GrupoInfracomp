@@ -19,7 +19,7 @@ public class Rojo extends Thread{
 			Producto productoRetirado = buzon.retirarElemento(i);
 			Integer identificador = productoRetirado.getIdentificador();
 			String resultado = productoRetirado.getMensaje();
-			System.out.println("El producto con identificador " + identificador + "con el mensaje " + resultado + " ha sido generado");
+			System.out.println("El producto con identificador " + identificador + " con el mensaje ' " + resultado + " ' ha sido generado\n");
 			long numero = ((long) (50 + Math.random()*450));
 			try {
 				sleep(numero);

@@ -65,7 +65,7 @@ public class Azul extends Thread {
 			{
 				sleep((long) (Math.random()*450));	
 				
-				productoEnProceso = new Producto(identificador.getIdActual(), "Creación de Producto Azul en Etapa 1", 0);
+				productoEnProceso = new Producto(identificador.getIdActual(), "Creación de Producto Azul en Etapa 1 ", 0);
 				System.out.println("Se creó producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
 				identificador.sumIdActual();
 			} 
@@ -132,7 +132,7 @@ public class Azul extends Thread {
 		{
 			sleep((long) (50 + Math.random()*450));		
 			
-			productoEnProceso.setMensaje(productoEnProceso.getMensaje() + "Modificado en proceso azul de la etapa " + etapa + ". ");
+			productoEnProceso.setMensaje(productoEnProceso.getMensaje() + "Modificado el proceso azul de la etapa " + etapa + ". ");
 		} 
 		catch (InterruptedException e) {}
 	}

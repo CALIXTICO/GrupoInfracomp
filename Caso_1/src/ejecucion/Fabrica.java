@@ -86,8 +86,6 @@ public class Fabrica {
 			procesosAzules[i] = new Azul(3, numProductosPorProceso, buzon2, buzonFinal, identificador);
 		}
 		
-		System.out.println(procesosAzules.length);
-		
 		//Despertado de Procesos
 		for (int i = 0; i < numProcesosAzules; i++)
 		{
