@@ -32,29 +32,30 @@ public class Fabrica {
 		
 		System.out.println("Por favor ingrese el n�mero de productos que crear� cada proceso en la etapa 1:");
 		int numProductosPorProceso = in.nextInt();
-		
-		
-		//Creaci�n del identificador
-		identificador = new Identificador((numProductosPorProceso * numProcesosPorEtapa)  - 1);
-		
-				
-		//Creacion de buzones
-		buzon1 = new Buzon(capacidadBuzones);
-		buzon2 = new Buzon(capacidadBuzones);
-		buzonFinal = new BuzonFinal(-1);
-		
-		//Creacion de Procesos
-		
-		//Azules
-		creacionProcesosAzules(numProcesosPorEtapa, numProductosPorProceso );
-		
-		//Naranjas
-		creacionProcesosNaranjas(numProductosPorProceso);
-		
-		//Rojo
-		Rojo procesoRojo = new Rojo(buzonFinal, numProcesosPorEtapa*numProductosPorProceso);
-		procesoRojo.start();
-		
+		 
+		if ((numProcesosPorEtapa > 0) && (numProductosPorProceso > 0))
+		{
+			//Creaci�n del identificador
+			identificador = new Identificador((numProductosPorProceso * numProcesosPorEtapa)  - 1);
+			
+					
+			//Creacion de buzones
+			buzon1 = new Buzon(capacidadBuzones);
+			buzon2 = new Buzon(capacidadBuzones);
+			buzonFinal = new BuzonFinal(-1);
+			
+			//Creacion de Procesos
+			
+			//Azules
+			creacionProcesosAzules(numProcesosPorEtapa, numProductosPorProceso );
+			
+			//Naranjas
+			creacionProcesosNaranjas(numProductosPorProceso);
+			
+			//Rojo
+			Rojo procesoRojo = new Rojo(buzonFinal, numProcesosPorEtapa*numProductosPorProceso);
+			procesoRojo.start();
+		}
 		
 		
 		
