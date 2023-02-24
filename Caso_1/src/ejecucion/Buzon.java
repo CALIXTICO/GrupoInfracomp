@@ -30,13 +30,13 @@ public class Buzon {
         return producto;
     }
 
-    // Para que la capacidad del buzón no se duplique al tener dos arrays el límite del buzón es por ende la suma de los tamaños del array, la suma de estos
+    // Para que la capacidad del buzï¿½n no se duplique al tener dos arrays el lï¿½mite del buzï¿½n es por ende la suma de los tamaï¿½os del array, la suma de estos
     // debe ser inferior a la capacidad dada por parametro.
     public synchronized int capacidadActual(){
         return productoAzul.size() + productoNaranja.size();
     }
     
-    //Metodo llamado por procesos para saber si el buzón está o no lleno
+    //Metodo llamado por procesos para saber si el buzon esta o no lleno
     public synchronized boolean estaLleno()
     {
         return (capacidadLimite == capacidadActual());

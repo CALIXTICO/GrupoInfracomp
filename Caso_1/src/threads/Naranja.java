@@ -30,11 +30,11 @@ public class Naranja extends Thread{
 		{
 			while (productos > 0)
 			{
-				//Creación de un producto
+				//Creacion de un producto
 				crearProducto();
 				productos--;
 				
-				//Entrega del producto al buzón de salida
+				//Entrega del producto al buzon de salida
 				entregarProducto();
 				
 			}			
@@ -44,14 +44,14 @@ public class Naranja extends Thread{
 		{
 			while (productos > 0)
 			{
-				//Extracción del producto del buzon de entrada
+				//Extraccion del producto del buzon de entrada
 				extraerProducto();
 				
 				//Procesamiento del producto
 				procesarProducto();
 				productos--;
 				
-				//Entrega del producto al buzón de salida
+				//Entrega del producto al buzï¿½n de salida
 				entregarProducto();
 			}
 		}
@@ -63,7 +63,7 @@ public class Naranja extends Thread{
 		{
 				
 			productoEnProceso = new Producto(identificador.getIdActual(), "Creacion de Producto Naranja en Etapa 1 ", 0);
-			System.out.println("Se creo producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
+			System.out.println("Se creo producto naranja " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
 			identificador.sumIdActual();
 		}
 	}
@@ -79,7 +79,7 @@ public class Naranja extends Thread{
 				}
 				else
 				{
-					System.out.println("Se entrego producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
+					System.out.println("Se entrego producto naranja " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
 					buzonSalida.almacenarNaranja(productoEnProceso);
 					notificarAzules(buzonSalida);
 					entregoProducto = true;
@@ -101,7 +101,7 @@ public class Naranja extends Thread{
 				else
 				{
 					productoEnProceso = buzonEntrada.retirarNaranja();
-					System.out.println("Se extrajo producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
+					System.out.println("Se extrajo producto naranja " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
 					notificarAzules(buzonEntrada);
 					extrajoProducto = true;
 				}

@@ -9,13 +9,13 @@ public class BuzonFinal extends Buzon{
         super(cant);
     }
 
-    //Dado que acá no hay dos listas es necesario reescribir el metodo de capacidad actual para que retorne el tamaño del HashMap
+    //Dado que aca no hay dos listas es necesario reescribir el metodo de capacidad actual para que retorne el tamanio del HashMap
   
     public synchronized int numProductos(){
         return map.size();
     }
 
-    // Recibe la llave y de allí toma un elemento y lo retorna 
+    // Recibe la llave y de alla toma un elemento y lo retorna 
     public synchronized Producto retirarElemento(Integer llave){
         return map.get(llave);
     }

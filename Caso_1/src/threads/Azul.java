@@ -30,11 +30,11 @@ public class Azul extends Thread {
 		{
 			while (cantidadProductosProcesar > 0)
 			{
-				//Creación de un producto
+				//Creacion de un producto
 				crearProducto();
 				cantidadProductosProcesar--;
 				
-				//Entrega del producto al buzón de salida
+				//Entrega del producto al buzon de salida
 				entregarProducto();
 				
 			}			
@@ -44,14 +44,14 @@ public class Azul extends Thread {
 		{
 			while (cantidadProductosProcesar > 0)
 			{
-				//Extracción del producto del buzon de entrada
+				//Extraccion del producto del buzon de entrada
 				extraerProducto();
 				
 				//Procesamiento del producto
 				procesarProducto();
 				cantidadProductosProcesar--;
 				
-				//Entrega del producto al buzón de salida
+				//Entrega del producto al buzon de salida
 				entregarProducto();
 			}
 		}
@@ -65,8 +65,8 @@ public class Azul extends Thread {
 			{
 				sleep((long) (Math.random()*450));	
 				
-				productoEnProceso = new Producto(identificador.getIdActual(), "Creación de Producto Azul en Etapa 1 ", 0);
-				System.out.println("Se creó producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
+				productoEnProceso = new Producto(identificador.getIdActual(), "Creacion de Producto Azul en Etapa 1 ", 0);
+				System.out.println("Se crea producto azul " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
 				identificador.sumIdActual();
 			} 
 			catch (InterruptedException e) {}
@@ -88,7 +88,7 @@ public class Azul extends Thread {
 					}
 					else
 					{
-						System.out.println("Se entrego producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
+						System.out.println("Se entrego producto azul  " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
 						buzonSalida.almacenarAzul(productoEnProceso);
 						buzonSalida.notifyAll();
 						entregoProducto = true;
@@ -116,7 +116,7 @@ public class Azul extends Thread {
 					else
 					{
 						productoEnProceso = buzonEntrada.retirarAzul();
-						System.out.println("Se extrajo producto " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
+						System.out.println("Se extrajo producto azul " + productoEnProceso.getIdentificador() + " en etapa " + etapa);
 						buzonEntrada.notifyAll();
 						extrajoProducto = true;
 					}
